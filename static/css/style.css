@@ -197,8 +197,8 @@ h2{
 .portofolio-video-box{
     display: inline-grid;
     justify-content: center;
-    width: 540px;
-    height: 400px;
+    max-width: 540px;
+    max-height: 400px;
     background-color: #f6f0ff;
     border: 2px solid var(--accent-dark);
     padding: 20px;
@@ -267,5 +267,9 @@ h2{
 
     .social-links {
         justify-content: flex-start;
+    }
+
+    .portofolio-video{
+        max-width: 240px
     }
 }
