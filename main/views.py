@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from main.models import Experience
-
+from main.models import Achievement
 
 def show_main(request):
     context = {
@@ -18,7 +18,14 @@ def show_main(request):
 
 def show_experience(request):
     context = {
-        "name": "Fayadh",
+        "name": "Muhammad Fayadh Azzahran",
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
+    
+def show_achievement(request):
+    context = {
+        "name": "Muhammad Fayadh Azzahran",
+        "achievement_list": Achievement.objects.all(),
+    }
+    return render(request, "achievement.html", context)

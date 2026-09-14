@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from main.models import Experience
-
+from main.models import Achievement
 
 class MainTest(TestCase):
     def setUp(self):
@@ -11,6 +11,12 @@ class MainTest(TestCase):
             title="Asisten Dosen PBP",
             description="Membantu mahasiswa memahami pengembangan web.",
             category="part-time",
+        )
+        self.achievement = Achievement.objects.create(
+            title="Top 1 Gamevidia ITB 9.0",
+            description="Memenangkan top 1 pada Arkavidia ITB 9.0 bidang Game Dev bersama tim kretacat express.",
+            category="perlombaan",
+            year="2025",
         )
 
     def test_main_url_is_accessible(self):
@@ -56,3 +62,24 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
+        
+    def test_achievement_page(self):
+        response = self.client.get(reverse("main:show_achievement"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "achievement.html")
+        self.assertContains(response, self.achievement.title)
+        self.assertContains(response, self.achievement.description)
+        self.assertContains(response, "Perlombaan")
+        self.assertContains(response, f'href="{reverse("main:show_main")}"')
+        
+    def test_empty_achievement_page(self):
+        Achievement.objects.all().delete()
+        response = self.client.get(reverse("main:show_achievement"))
+
+        self.assertContains(response, "Belum ada penghargaan yang ditambahkan.")
+        
+    def test_achievement_model(self):
+        self.assertEqual(str(self.achievement), "Top 1 Gamevidia ITB 9.0")
+        self.assertEqual(self.achievement.category, "perlombaan")
+        self.assertEqual(self.achievement.year, "2025")
