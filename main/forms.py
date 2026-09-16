@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea, URLInput
 
-from main.models import Project
+from main.models import Project, Experience, Achievement
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -41,12 +41,61 @@ class ProjectForm(ModelForm):
             ),
             "project_url": URLInput(
                 attrs={
-                    "placeholder": "https://github.com/kakBurhan/burhanquestv4",
+                    "placeholder": "https://github.com/yaddwhuh/my-portofolio",
                 }
             ),
             "project_image_url": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                }
+            ),
+        }
+
+class ExperienceForm(ModelForm):
+    class Meta:
+        model = Experience
+        fields = [
+            "title",
+            "description",
+            "category",
+            "thumbnail",
+            "ended_at",
+        ]
+
+        labels = {
+            "title": "Nama Pengalaman",
+            "description": "Deskripsi Pengalaman",
+            "category": "Kategori Pengalaman",
+            "thumbnail": "URL thumbnail",
+            "ended_at": "Tahun Selesai",
+        }
+
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "Staf Kepanitiaan X",
+                    "maxlength": 255,
+                }
+            ),
+            "description": Textarea(
+                attrs={
+                    "placeholder": "Ceritakan Pengalamanmu",
+                    "rows": 3,
+                }
+            ),
+            "category": TextInput(
+                attrs={
+                    "placeholder": "Internship, Research, Volunteer, Part-time, Full-time",
+                }
+            ),
+            "thumbnail": URLInput(
+                attrs={
+                    "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                }
+            ),
+            "ended_at": URLInput(
+                attrs={
+                    "placeholder": "ex: 2026 (Kosongkan kalau masih berjalan)",
                 }
             ),
         }
