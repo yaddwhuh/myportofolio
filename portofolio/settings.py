@@ -75,6 +75,8 @@ TEMPLATES = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://muhammad-fayadh51-myportofolio.pws.cs.ui.ac.id"]
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 WSGI_APPLICATION = 'portofolio.wsgi.application'

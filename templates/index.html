@@ -1,115 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ name }} - Portofolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
-			<nav>
-				<a href="{% url 'main:show_main' %}">Profile</a>
-				<a href="{% url 'main:show_experience' %}">Experience</a>
-				<a href="{% url 'main:show_achievement' %}">Achievement</a>
-			</nav>        
+{% extends 'base.html' %}
+{% block content %}
+<main>
+	<section class="hero" id="profile">
+		<div class="container hero-grid">
+			<div class="hero-identity">
+				<p class="hero-kicker">S1 Ilmu Komputer &middot; Universitas Indonesia</p>
+				<h1>{{ name }}</h1>
+			</div>
+			<div class="hero-photo">
+				<div class="photo-block"></div>
+				<img class="avatar" src="/static/img/shark.png" alt="">
+			</div>
+			<div class="hero-details">
+				<p class="bio">{{ bio }}</p>
+				<dl class="meta-list">
+					<div class="meta-row">
+						<dt>NPM</dt>
+						<dd>{{ npm }}</dd>
+					</div>
+					<div class="meta-row">
+						<dt>Program</dt>
+						<dd>{{ study_program }}</dd>
+					</div>
+				</dl>
+				<div class="social-links">
+					<a href="https://github.com/yaddwhuh/" class="social-link">GitHub</a>
+					<a href="https://www.linkedin.com/in/muhammad-fayadh-azzahran-606191373/" class="social-link">LinkedIn</a>
+					<a href="mailto:muhammad.fayadh51@ui.ac.id" class="social-link">Email</a>
+				</div>
+			</div>
 		</div>
-    </header>
-
-    <main>
-        <section class="hero" id="profile">
-            <div class="container hero-grid">
-                <div class="hero-identity">
-                    <p class="hero-kicker">S1 Ilmu Komputer &middot; Universitas Indonesia</p>
-                    <h1>{{ name }}</h1>
-                </div>
-                <div class="hero-photo">
-                    <div class="photo-block"></div>
-                    <img class="avatar" src="/static/img/shark.png" alt="">
-                </div>
-                <div class="hero-details">
-                    <p class="bio">{{ bio }}</p>
-                    <dl class="meta-list">
-                        <div class="meta-row">
-                            <dt>NPM</dt>
-                            <dd>{{ npm }}</dd>
-                        </div>
-                        <div class="meta-row">
-                            <dt>Program</dt>
-                            <dd>{{ study_program }}</dd>
-                        </div>
-                    </dl>
-                    <div class="social-links">
-                        <a href="https://github.com/yaddwhuh/" class="social-link">GitHub</a>
-                        <a href="https://www.linkedin.com/in/muhammad-fayadh-azzahran-606191373/" class="social-link">LinkedIn</a>
-                        <a href="mailto:muhammad.fayadh51@ui.ac.id" class="social-link">Email</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <hr class="page-break">
-        <!--Main section done above, also gave a nice line to divide between parts :3-->
-        <section class="portofolio" id="arts">
-            <div class="portofolio-header">
-                <h1>Art Portofolio</h1>
-            </div>
-            <div class="portofolio-container">
-                <div class="portofolio-box">
-                    <img class="portofolio-image" src="/static/img/step it.png">
-                    <p class="portofolio-title">Step It - Shirobon</p>
-                    <p class="description">"Jacket art made for Project: Rusher!"</p>
-                </div>
-                 <div class="portofolio-box">
-                    <img class="portofolio-image" src="/static/img/galaxyworld.png">
-                    <p class="portofolio-title">Galaxy World - PYKAMIA</p>
-                    <p class="description">"Jacket art made for Project: Rusher!"</p>
-                </div>
-                <div class="portofolio-box">
-                    <img class="portofolio-image" src="/static/img/shoe.jpg">
-                    <p class="portofolio-title">SHØE - Tatsuoto vs. Franky vs. Marilette Aokisama</p>
-                    <p class="description">"Jacket art made for Project: Rusher!"</p>
-                </div>
-                <div class="portofolio-box">
-                    <img class="portofolio-image" src="/static/img/begin.png">
-                    <p class="portofolio-title">B3611V - trung-nova</p>
-                    <p class="description">"An Artfight attack and a fanart of vivid/stasis jacket."</p>
-                </div>
-                <div class="portofolio-box">
-                    <img class="portofolio-image" src="/static/img/hotline_ophiucus.png">
-                    <p class="portofolio-title">hotline_ophiucus - nitro</p>
-                    <p class="description">"Original jacket art made for Project: Rusher fanmade."</p>
-                </div>               
-            </div>
-        </section>
-        <hr class="page-break">
-        <section class="portofolio" id="rg-work">
-            <div class="portofolio-header">
-                <h1>Rhythm Games Works</h1>
-            </div>
-            <div class="portofolio-container">
-                <div class="portofolio-video-box">
-                    <video class="portofolio-video" src="/static/vid/crux.mp4" autoplay muted></video>
-                    <p class="portofolio-title">Crux - うしみつ</p>
-                    <p class="description">Project: Rusher fanmade.</p>
-                </div>
-                <div class="portofolio-video-box">
-                    <video class="portofolio-video" src="/static/vid/hotline.mp4" autoplay muted></video>
-                    <p class="portofolio-title">hotline_ophiucus - nitro</p>
-                    <p class="description">Project: Rusher fanmade.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
-        </div>
-    </footer>
-</body>
-</html>
+	</section>
+	<hr class="page-break">
+	<!--Main section done above, also gave a nice line to divide between parts :3-->
+	<section class="portofolio" id="arts">
+		<div class="portofolio-header">
+			<h1>Art Portofolio</h1>
+		</div>
+		<div class="portofolio-container">
+			<div class="portofolio-box">
+				<img class="portofolio-image" src="/static/img/step it.png">
+				<p class="portofolio-title">Step It - Shirobon</p>
+				<p class="description">"Jacket art made for Project: Rusher!"</p>
+			</div>
+			 <div class="portofolio-box">
+				<img class="portofolio-image" src="/static/img/galaxyworld.png">
+				<p class="portofolio-title">Galaxy World - PYKAMIA</p>
+				<p class="description">"Jacket art made for Project: Rusher!"</p>
+			</div>
+			<div class="portofolio-box">
+				<img class="portofolio-image" src="/static/img/shoe.jpg">
+				<p class="portofolio-title">SHØE - Tatsuoto vs. Franky vs. Marilette Aokisama</p>
+				<p class="description">"Jacket art made for Project: Rusher!"</p>
+			</div>
+			<div class="portofolio-box">
+				<img class="portofolio-image" src="/static/img/begin.png">
+				<p class="portofolio-title">B3611V - trung-nova</p>
+				<p class="description">"An Artfight attack and a fanart of vivid/stasis jacket."</p>
+			</div>
+			<div class="portofolio-box">
+				<img class="portofolio-image" src="/static/img/hotline_ophiucus.png">
+				<p class="portofolio-title">hotline_ophiucus - nitro</p>
+				<p class="description">"Original jacket art made for Project: Rusher fanmade."</p>
+			</div>               
+		</div>
+	</section>
+	<hr class="page-break">
+	<section class="portofolio" id="rg-work">
+		<div class="portofolio-header">
+			<h1>Rhythm Games Works</h1>
+		</div>
+		<div class="portofolio-container">
+			<div class="portofolio-video-box">
+				<video class="portofolio-video" src="/static/vid/crux.mp4" autoplay muted></video>
+				<p class="portofolio-title">Crux - うしみつ</p>
+				<p class="description">Project: Rusher fanmade.</p>
+			</div>
+			<div class="portofolio-video-box">
+				<video class="portofolio-video" src="/static/vid/hotline.mp4" autoplay muted></video>
+				<p class="portofolio-title">hotline_ophiucus - nitro</p>
+				<p class="description">Project: Rusher fanmade.</p>
+			</div>
+		</div>
+	</section>
+</main>
+{% endblock content %}
