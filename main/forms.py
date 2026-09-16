@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea, URLInput
 
-from main.models import Project, Experience, Achievement
+from main.models import *
 
 class ProjectForm(ModelForm):
     class Meta:
