@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from main.models import Experience
 from main.models import Achievement
+from main.models import Project
 from main.forms import ProjectForm
 
 def show_main(request):
@@ -35,6 +36,13 @@ def show_achievement(request):
     }
     return render(request, "achievement.html", context)
 
+def show_project(request):
+    context = {
+        "name": "Muhammad Fayadh Azzahran",
+        "project_list": Project.objects.all(),
+    }
+    return render(request, "projects.html", context)
+
 def create_project(request):
     form = ProjectForm(request.POST or None)
 
@@ -44,7 +52,7 @@ def create_project(request):
         return redirect("main:show_projects")
 
     context = {
-        "name": "Muhammad Fayadh Azzahran",
+        "name": "Burhan",
         "form": form,
     }
     return render(request, "projects_form.html", context)

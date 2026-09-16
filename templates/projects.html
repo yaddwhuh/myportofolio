@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+	<section class="showcase-section" id="projects">
+		<div class="container">
+			<p class="section-kicker">Project yang telah saya buat</p>
+			<h1>Projects</h1>
+
+			<div class="showcase-grid">
+				{% for project in project_list %}
+					<article class="showcase-card">
+						<span class="showcase-category">
+							{{ project.get_category_display }}
+						</span>
+						<h2>{{ project.title }}</h2>
+						<p class="showcase-description">
+							{{ project.description }}
+						</p>
+					</article>
+				{% empty %}
+					<p class="empty-state">
+						Belum ada proyek yang ditambahkan.
+					</p>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+</main>
+{% endblock content %}
