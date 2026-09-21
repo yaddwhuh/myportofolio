@@ -23,3 +23,11 @@ Pada pengerjaan Tugas 1, saya menggunakan AI saat mencari beberapa sintaks html 
 2. Ketika data harus terus diperbarui, mengubah kode html akan membuat kode template terlalu panjang. Hal ini akan buruk dalam pengembangan lebih jauh.
 
 3. makemigrations akan membuat berkas migrasi yang belum diaplikasikan ke dalam database, lalu migrate akan mengaplikasikan berkas yang dibuat makemigrations ke dalam database. Kedua hal tersebut dilakukan ketika kita membuat perubahan pada struktur model (mengubah nama variabel, menambahkan model baru)
+
+### Tugas 3
+
+1. 
+
+2.
+
+3. 

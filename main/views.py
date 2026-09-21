@@ -172,3 +172,51 @@ def delete_experience(request, experience_id):
         return redirect("main:show_experience")
 
     return redirect("main:show_experience")
+    
+def edit_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id) 
+    form = ProjectForm(request.POST, instance=project)
+    
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Proyek berhasil diupdate!")
+        return redirect("main:show_projects")
+
+    context = {
+        "name": "Muhammad Fayadh Azzharan",
+        "form": ProjectForm(instance=project),
+        "project": project,
+    }
+    return render(request, "projects_form.html", context)
+    
+def edit_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id) 
+    form = ExperienceForm(request.POST, instance=experience)
+    
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Pengalaman berhasil diupdate!")
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Muhammad Fayadh Azzharan",
+        "form": ExperienceForm(instance=experience),
+        "experience": experience,
+    }
+    return render(request, "experience_form.html", context)
+    
+def edit_achievement(request, achievement_id):
+    achievement = get_object_or_404(Achievement, pk=achievement_id) 
+    form = AchievementForm(request.POST, instance=achievement)
+    
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Penghargaan berhasil diupdate!")
+        return redirect("main:show_achievement")
+
+    context = {
+        "name": "Muhammad Fayadh Azzharan",
+        "form": AchievementForm(instance=achievement),
+        "achievement": achievement,
+    }
+    return render(request, "achievement_form.html", context)

@@ -41,6 +41,12 @@
 						</p>
 						<div class="project-actions">
 							{% include "components/achievement_delete_modal.html" with achievement=achievement %}
+							<p class="showcase-status">
+								<a href="{% url 'main:edit_achievement' achievement.id %}"
+								   class="button">
+									Edit Penghargaan
+								</a>
+							</p>
 						</div>
 					</article>
 				{% empty %}

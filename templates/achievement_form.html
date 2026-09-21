@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% block meta %}
-    <title>Add Achievement - {{ name }}</title>
+    <title>{% if achievement %}Edit{% else %}Create{% endif %} Achievement - {{ name }}</title>
 {% endblock meta %}
 {% block content %}
     <main>
         <section class="showcase-section">
             <div class="container">
-                <h1>Add New Achievement</h1>
+                <h1>{% if achievement %}Edit{% else %}Create{% endif %} Achievement</h1>
                 <form method="post"
-                      action="{% url 'main:create_achievement' %}"
                       class="form">
                     {% csrf_token %}
                     {% for field in form %}
@@ -20,7 +19,7 @@
                             {% endfor %}
                         </div>
                     {% endfor %}
-                    <button type="submit" class="button">Tambah Penghargaan</button>
+                    <button type="submit" class="button">{% if achievement %}Edit{% else %}Create{% endif %} Achievement</button>
                     <a href="{% url 'main:show_achievement' %}" class="button button-secondary">Batal</a>
                 </form>
             </div>

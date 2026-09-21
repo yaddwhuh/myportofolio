@@ -15,7 +15,10 @@ urlpatterns = [
     path("api/projects/", get_projects_json, name="get_projects_json"),
     path("api/achievement/", get_achievement_json, name="get_achievement_json"),
     path("api/experience/", get_experience_json, name="get_experience_json"),    
-    path("projects/<uuid:project_id>/delete/",delete_project, name="delete_project"),
-    path("experience/<uuid:experience_id>/delete/",delete_experience, name="delete_experience"),
-    path("achievement/<uuid:achievement_id>/delete/",delete_achievement, name="delete_achievement"),
+    path("projects/<uuid:project_id>/delete/", delete_project, name="delete_project"),
+    path("experience/<uuid:experience_id>/delete/", delete_experience, name="delete_experience"),
+    path("achievement/<uuid:achievement_id>/delete/", delete_achievement, name="delete_achievement"),
+    path("projects/<uuid:project_id>/edit/", edit_project, name="edit_project"),
+    path("experience/<uuid:experience_id>/edit/", edit_experience, name="edit_experience"),
+    path("achievement/<uuid:achievement_id>/edit/", edit_achievement, name="edit_achievement"),
 ]

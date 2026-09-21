@@ -45,6 +45,12 @@
 						<div class="project-card-actions">
 							<div class="project-actions">
 								{% include "components/experience_delete_modal.html" with experience=experience %}
+								<p class="showcase-status">
+									<a href="{% url 'main:edit_experience' experience.id %}"
+									   class="button">
+										Edit Pengalaman
+									</a>
+								</p>
 							</div>
 					</article>
 				{% empty %}

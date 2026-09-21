@@ -43,6 +43,12 @@
                                         <a href="{{ project.project_url }}" class="button">Lihat Project</a>
                                     {% endif %}
                                     {% include "components/project_delete_modal.html" with project=project %}
+									<p class="showcase-status">
+										<a href="{% url 'main:edit_project' project.id %}"
+										   class="button">
+											Edit Proyek
+										</a>
+									</p>
                                 </div>
                             </div>
                         </article>
