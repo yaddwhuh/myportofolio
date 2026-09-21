@@ -7,8 +7,25 @@
 	<section class="showcase-section" id="achievement">
 		<div class="container">
 			<p class="section-kicker">Yang telah saya capai</p>
-			<h1>Achievement</h1>
-
+			<div class="project-header">
+				<h1>Achievement</h1>
+				<a href="{% url 'main:create_achievement' %}"
+				   class="button project-add-button">
+					<span aria-hidden="true">+</span>
+					Tambah Penghargaan
+				</a>
+			</div>
+			<form method="get"
+				  action="{% url 'main:show_achievement' %}"
+				  class="project-search">
+				<input type="search"
+					   name="title"
+					   value="{{ title_query }}"
+					   placeholder="Cari berdasarkan nama penghargaan"
+					   class="project-search__input"
+					   aria-label="Cari berdasarkan nama penghargaan">
+				<button type="submit" class="button">Cari</button>
+			</form>			
 			<div class="showcase-grid">
 				{% for achievement in achievement_list %}
 					<article class="showcase-card">
@@ -22,6 +39,9 @@
 						<p class="showcase-status">
 							{{ achievement.year }}
 						</p>
+						<div class="project-actions">
+							{% include "components/achievement_delete_modal.html" with achievement=achievement %}
+						</div>
 					</article>
 				{% empty %}
 					<p class="empty-state">

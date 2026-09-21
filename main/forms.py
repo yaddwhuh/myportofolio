@@ -93,9 +93,58 @@ class ExperienceForm(ModelForm):
                     "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
                 }
             ),
-            "ended_at": URLInput(
+            "ended_at": TextInput(
                 attrs={
                     "placeholder": "ex: 2026 (Kosongkan kalau masih berjalan)",
+                }
+            ),
+        }
+
+class AchievementForm(ModelForm):
+    class Meta:
+        model = Achievement
+        fields = [
+            "title",
+            "description",
+            "category",
+            "thumbnail",
+            "year",
+        ]
+
+        labels = {
+            "title": "Nama Lomba",
+            "description": "Deskripsi Lomba",
+            "category": "Kategori Perlombaan",
+            "thumbnail": "URL thumbnail",
+            "year": "Tahun Perlombaan",
+        }
+
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "ex: GEMASTIK XVI",
+                    "maxlength": 255,
+                }
+            ),
+            "description": Textarea(
+                attrs={
+                    "placeholder": "Penghargaan yang didapatkan",
+                    "rows": 3,
+                }
+            ),
+            "category": TextInput(
+                attrs={
+                    "placeholder": "Perlombaan, Penelitian, Lainnya",
+                }
+            ),
+            "thumbnail": URLInput(
+                attrs={
+                    "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                }
+            ),
+            "year": TextInput(
+                attrs={
+                    "placeholder": "ex: 2026",
                 }
             ),
         }
