@@ -26,8 +26,14 @@ Pada pengerjaan Tugas 1, saya menggunakan AI saat mencari beberapa sintaks html 
 
 ### Tugas 3
 
-1. 
+1. ModelForm pada Django akan secara otomatis membaca model yang sudah terdefinisi dan membentuk template berdasarkan hal tersebut. Oleh karena itu, penggunaan ModelForm akan mengurangi pengulangan kode saat membuat form dengan HTML manual. Selain itu, csrf_token berfungsi sebagai validasi dan verifikasi ketika user mengisi form atau melakukan aksi.
 
-2.
+2. JSON lebih disukai karena bentuknya yang ringkas, lebih cepat untuk diambil datanya, dan 'natural' terhadap bahasa-bahasa pemrograman lainnya.
 
-3. 
+3. Pertama, fungsi views akan mengambil data dengan bentuk Object Python. Dari sini, browser API tidak bisa mengenali data yang diambil, karena bentuknya masih dalam Object Python, sehingga serialization (Object -> JSON/XML) diperlukan. Kita menggunakan serializer dari Django framework. Fungsi get_projects_json pada views.py adalah fungsi yang kita buat untuk proses serialisasi tersebut.
+
+AI Digunakan pada tugas ini, precisely ketika mengimplementasikan Edit pada website. 
+
+Prompt: `Lets say I have a model called Project, and a form called ProjectForm, and a template for creating form for it. Do I need to make new template for updating form?`
+
+Jawaban: `No — you can (and generally should) reuse the same template for both creating and updating a Project. The template just renders whatever form object it's given; it doesn't care whether that form is bound to a new instance or an existing one. The difference between "create" and "update" lives in the view, not the template...` dan diberikan contoh kode. Kode dibaca sendiri dan diimplementasikan sendiri untuk memastikan dua hal: Sintaks yang digunakan konsisten dan Saya mengerti proses dari fungsi tersebut.
