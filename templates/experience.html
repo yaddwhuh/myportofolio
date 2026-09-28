@@ -9,11 +9,13 @@
 			<p class="section-kicker">Pengalaman yang pernah saya dapatkan</p>
 			<div class="project-header">
 				<h1>Experiences</h1>
+				{% if user.is_superuser %}
 				<a href="{% url 'main:create_experience' %}"
 				   class="button project-add-button">
 					<span aria-hidden="true">+</span>
 					Tambah Pengalaman
 				</a>
+				{% endif %}
 			</div>
 			<form method="get"
 				  action="{% url 'main:show_experience' %}"
