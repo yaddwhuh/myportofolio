@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+import datetime
 
 from main.models import *
 from main.forms import *
 
 def show_main(request):
+    last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
     context = {
         "name": "Muhammad Fayadh Azzahran",
         "npm": "2506586961",
@@ -16,11 +22,15 @@ def show_main(request):
             "A Computer Science student who is also, unfortunately, a furry. "
             "Interests include rhythm games, art, and vocal synthesizers."
         ),
+        "last_login": last_login
     }
     return render(request, "index.html", context)
 
-
+@login_required(login_url="/login/")
 def create_project(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     form = ProjectForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -33,8 +43,12 @@ def create_project(request):
         "form": form,
     }
     return render(request, "projects_form.html", context)
-    
+
+@login_required(login_url="/login/")    
 def create_experience(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     form = ExperienceForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -48,7 +62,11 @@ def create_experience(request):
     }
     return render(request, "experience_form.html", context)
 
+@login_required(login_url="/login/")
 def create_achievement(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     form = AchievementForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -69,7 +87,7 @@ def get_projects_json(request):
     if title_query:
         projects = projects.filter(title__icontains=title_query)
 
-    projects_json = serializers.serialize("json", projects)
+    projects_json = serializers.serialize("json", projects, use_natural_foreign_keys=True)
     return HttpResponse(projects_json, content_type="application/json")
 
 def get_achievement_json(request):
@@ -79,7 +97,7 @@ def get_achievement_json(request):
     if title_query:
         achievements = achievements.filter(title__icontains=title_query)
 
-    achievements_json = serializers.serialize("json", achievements)
+    achievements_json = serializers.serialize("json", achievements, use_natural_foreign_keys=True)
     return HttpResponse(achievements_json, content_type="application/json")
 
 def get_experience_json(request):
@@ -89,7 +107,7 @@ def get_experience_json(request):
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
-    experiences_json = serializers.serialize("json", experiences)
+    experiences_json = serializers.serialize("json", experiences, use_natural_foreign_keys=True)
     return HttpResponse(experiences_json, content_type="application/json")
     
 def show_projects(request):
@@ -142,8 +160,12 @@ def show_experience(request):
         "title_query": title_query,
     }
     return render(request, "experience.html", context)
-    
+
+@login_required(login_url="/login/")    
 def delete_project(request, project_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     project = get_object_or_404(Project, pk=project_id)
 
     if request.method == "POST":
@@ -152,8 +174,12 @@ def delete_project(request, project_id):
         return redirect("main:show_projects")
 
     return redirect("main:show_projects")
-    
+
+@login_required(login_url="/login/")    
 def delete_achievement(request, achievement_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     achievement = get_object_or_404(Achievement, pk=achievement_id)
 
     if request.method == "POST":
@@ -163,7 +189,11 @@ def delete_achievement(request, achievement_id):
 
     return redirect("main:show_achievement")
     
+@login_required(login_url="/login/")    
 def delete_experience(request, experience_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     experience = get_object_or_404(Experience, pk=experience_id)
 
     if request.method == "POST":
@@ -172,8 +202,12 @@ def delete_experience(request, experience_id):
         return redirect("main:show_experience")
 
     return redirect("main:show_experience")
-    
+
+@login_required(login_url="/login/")    
 def edit_project(request, project_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     project = get_object_or_404(Project, pk=project_id) 
     form = ProjectForm(request.POST, instance=project)
     
@@ -188,8 +222,12 @@ def edit_project(request, project_id):
         "project": project,
     }
     return render(request, "projects_form.html", context)
-    
+
+@login_required(login_url="/login/")    
 def edit_experience(request, experience_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     experience = get_object_or_404(Experience, pk=experience_id) 
     form = ExperienceForm(request.POST, instance=experience)
     
@@ -204,8 +242,12 @@ def edit_experience(request, experience_id):
         "experience": experience,
     }
     return render(request, "experience_form.html", context)
-    
+
+@login_required(login_url="/login/")    
 def edit_achievement(request, achievement_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+        
     achievement = get_object_or_404(Achievement, pk=achievement_id) 
     form = AchievementForm(request.POST, instance=achievement)
     
@@ -220,3 +262,75 @@ def edit_achievement(request, achievement_id):
         "achievement": achievement,
     }
     return render(request, "achievement_form.html", context)
+    
+def register(request):
+    form = UserCreationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Akun berhasil dibuat. Silakan login.")
+        return redirect("main:login")
+
+    context = {
+        "name": "Muhammad Fayadh Azzahran",
+        "form": form,
+    }
+    return render(request, "register.html", context)
+    
+def login_user(request):
+    form = AuthenticationForm(request, data=request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = redirect("main:show_main")
+        response.set_cookie('last_login', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        return response
+
+    context = {
+        "name": "Muhammad Fayadh Azzahran",
+        "form": form,
+    }
+    return render(request, "login.html", context)
+    
+def logout_user(request):
+    logout(request)
+    response = redirect("main:show_main")
+    response.delete_cookie("last_login")
+    return response
+    
+@login_required(login_url="/login/")
+def toggle_star_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+
+    if request.method == "POST":
+        if request.user in project.starred_by.all():
+            project.starred_by.remove(request.user)
+        else:
+            project.starred_by.add(request.user)
+
+    return redirect("main:show_projects")
+
+@login_required(login_url="/login/")
+def toggle_star_achievement(request, achievement_id):
+    achievement = get_object_or_404(Achievement, pk=achievement_id)
+
+    if request.method == "POST":
+        if request.user in achievement.starred_by.all():
+            achievement.starred_by.remove(request.user)
+        else:
+            achievement.starred_by.add(request.user)
+
+    return redirect("main:show_achievement")
+
+@login_required(login_url="/login/")
+def toggle_star_experience(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
+
+    return redirect("main:show_experience")

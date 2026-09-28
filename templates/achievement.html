@@ -39,14 +39,19 @@
 						<p class="showcase-status">
 							{{ achievement.year }}
 						</p>
-						<div class="project-actions">
-							{% include "components/achievement_delete_modal.html" with achievement=achievement %}
-							<p class="showcase-status">
-								<a href="{% url 'main:edit_achievement' achievement.id %}"
-								   class="button">
-									Edit Penghargaan
-								</a>
-							</p>
+						<div class="project-card-actions">
+							<div class="project-actions">
+							{% include "components/achievement_star.html" with achievement=achievement %}
+							{% if user.is_superuser %}
+								{% include "components/achievement_delete_modal.html" with achievement=achievement %}
+								<p class="project-actions">
+									<a href="{% url 'main:edit_achievement' achievement.id %}"
+									   class="button">
+										Edit Penghargaan
+									</a>
+								</p>
+							{% endif %}
+							</div>
 						</div>
 					</article>
 				{% empty %}

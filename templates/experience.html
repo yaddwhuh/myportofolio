@@ -44,13 +44,16 @@
 						{% endif %}
 						<div class="project-card-actions">
 							<div class="project-actions">
+								{% include "components/experience_star.html" with experience=experience %}
+								{% if user.is_superuser %}
 								{% include "components/experience_delete_modal.html" with experience=experience %}
-								<p class="showcase-status">
+								<p class="project-actions">
 									<a href="{% url 'main:edit_experience' experience.id %}"
 									   class="button">
 										Edit Pengalaman
 									</a>
 								</p>
+								{% endif %}
 							</div>
 					</article>
 				{% empty %}

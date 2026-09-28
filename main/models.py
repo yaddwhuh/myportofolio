@@ -1,4 +1,5 @@
 import uuid
+from django.contrib.auth.models import User
 from django.db import models
 
 class Experience(models.Model):
@@ -18,6 +19,8 @@ class Experience(models.Model):
     thumbnail = models.URLField(blank=True, null=True)
     started_at = models.DateTimeField(auto_now_add=True)
     ended_at = models.DateTimeField(blank=True, null=True)
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_experiences", blank=True)
     def __str__(self):
         return self.title
     
@@ -38,6 +41,8 @@ class Achievement(models.Model):
     category = models.CharField(max_length=20, choices=ACHIEVEMENT_CHOICES, default='perlombaan')
     thumbnail = models.URLField(blank=True, null=True)
     year = models.CharField(max_length=5)
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_achievements", blank=True)
     def __str__(self):
         return self.title
         
@@ -48,6 +53,8 @@ class Project(models.Model):
     tech_stack = models.CharField(max_length=255)
     project_url = models.URLField(blank=True)
     project_image_url = models.URLField(blank=True, max_length=500)
-
+    starred_by = models.ManyToManyField(
+        User, related_name="starred_projects", blank=True)
+        
     def __str__(self):
         return self.title

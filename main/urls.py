@@ -21,4 +21,10 @@ urlpatterns = [
     path("projects/<uuid:project_id>/edit/", edit_project, name="edit_project"),
     path("experience/<uuid:experience_id>/edit/", edit_experience, name="edit_experience"),
     path("achievement/<uuid:achievement_id>/edit/", edit_achievement, name="edit_achievement"),
+    path("register/", register, name="register"),
+    path("login/", login_user, name="login"),
+    path("logout/", logout_user, name="logout"),
+    path("projects/<uuid:project_id>/star/", toggle_star_project, name="toggle_star_project"),
+    path("achievement/<uuid:achievement_id>/star/", toggle_star_achievement, name="toggle_star_achievement"),
+    path("experience/<uuid:experience_id>/star/", toggle_star_experience, name="toggle_star_experience"),
 ]
