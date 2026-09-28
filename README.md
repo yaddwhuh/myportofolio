@@ -37,3 +37,7 @@ AI Digunakan pada tugas ini, precisely ketika mengimplementasikan Edit pada webs
 Prompt: `Lets say I have a model called Project, and a form called ProjectForm, and a template for creating form for it. Do I need to make new template for updating form?`
 
 Jawaban: `No — you can (and generally should) reuse the same template for both creating and updating a Project. The template just renders whatever form object it's given; it doesn't care whether that form is bound to a new instance or an existing one. The difference between "create" and "update" lives in the view, not the template...` dan diberikan contoh kode. Kode dibaca sendiri dan diimplementasikan sendiri untuk memastikan dua hal: Sintaks yang digunakan konsisten dan Saya mengerti proses dari fungsi tersebut.
+
+### Tugas 4
+
+AI sama sekali tidak digunakan dalam tugas ini, semua baris kode dibuat dari tutorial minggu ini dan pertanyaan pada stackoverflow.

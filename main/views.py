@@ -28,7 +28,7 @@ def show_main(request):
 
 @login_required(login_url="/login/")
 def create_project(request):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     form = ProjectForm(request.POST or None)
@@ -46,7 +46,7 @@ def create_project(request):
 
 @login_required(login_url="/login/")    
 def create_experience(request):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     form = ExperienceForm(request.POST or None)
@@ -64,7 +64,7 @@ def create_experience(request):
 
 @login_required(login_url="/login/")
 def create_achievement(request):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     form = AchievementForm(request.POST or None)
@@ -124,7 +124,9 @@ def show_projects(request):
         "name": "Muhammad Fayadh Azzahran",
         "project_list": projects,
         "title_query": title_query,
+        "is_editor": request.user.groups.filter(name="Editor").exists(),
     }
+    
     return render(request, "projects.html", context)
 
 def show_achievement(request):
@@ -141,7 +143,9 @@ def show_achievement(request):
         "name": "Muhammad Fayadh Azzahran",
         "achievement_list": achievements,
         "title_query": title_query,
+        "is_editor": request.user.groups.filter(name="Editor").exists()
     }
+    
     return render(request, "achievement.html", context)
 
 def show_experience(request):
@@ -158,12 +162,13 @@ def show_experience(request):
         "name": "Muhammad Fayadh Azzahran",
         "experience_list": experiences,
         "title_query": title_query,
+        "is_editor": request.user.groups.filter(name="Editor").exists()
     }
     return render(request, "experience.html", context)
 
 @login_required(login_url="/login/")    
 def delete_project(request, project_id):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     project = get_object_or_404(Project, pk=project_id)
@@ -177,7 +182,7 @@ def delete_project(request, project_id):
 
 @login_required(login_url="/login/")    
 def delete_achievement(request, achievement_id):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     achievement = get_object_or_404(Achievement, pk=achievement_id)
@@ -191,7 +196,7 @@ def delete_achievement(request, achievement_id):
     
 @login_required(login_url="/login/")    
 def delete_experience(request, experience_id):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     experience = get_object_or_404(Experience, pk=experience_id)
@@ -205,7 +210,7 @@ def delete_experience(request, experience_id):
 
 @login_required(login_url="/login/")    
 def edit_project(request, project_id):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     project = get_object_or_404(Project, pk=project_id) 
@@ -225,7 +230,7 @@ def edit_project(request, project_id):
 
 @login_required(login_url="/login/")    
 def edit_experience(request, experience_id):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     experience = get_object_or_404(Experience, pk=experience_id) 
@@ -245,7 +250,7 @@ def edit_experience(request, experience_id):
 
 @login_required(login_url="/login/")    
 def edit_achievement(request, achievement_id):
-    if not request.user.is_superuser:
+    if not request.user.is_superuser or request.user.groups.filter(name='Editor').exists():
         raise PermissionDenied
         
     achievement = get_object_or_404(Achievement, pk=achievement_id) 
@@ -334,3 +339,6 @@ def toggle_star_experience(request, experience_id):
             experience.starred_by.add(request.user)
 
     return redirect("main:show_experience")
+    
+def is_user_in_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
