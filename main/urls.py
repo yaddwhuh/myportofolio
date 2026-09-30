@@ -27,4 +27,5 @@ urlpatterns = [
     path("projects/<uuid:project_id>/star/", toggle_star_project, name="toggle_star_project"),
     path("achievement/<uuid:achievement_id>/star/", toggle_star_achievement, name="toggle_star_achievement"),
     path("experience/<uuid:experience_id>/star/", toggle_star_experience, name="toggle_star_experience"),
+    path("projects/add-ajax/", create_project_ajax, name="create_project_ajax"),
 ]

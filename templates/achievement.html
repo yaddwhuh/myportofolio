@@ -46,12 +46,10 @@
 							{% include "components/achievement_star.html" with achievement=achievement %}
 							{% if user.is_superuser or is_editor %}
 								{% include "components/achievement_delete_modal.html" with achievement=achievement %}
-								<p class="project-actions">
-									<a href="{% url 'main:edit_achievement' achievement.id %}"
-									   class="button">
-										Edit Penghargaan
-									</a>
-								</p>
+								<a href="{% url 'main:edit_achievement' achievement.id %}"
+								   class="button">
+									Edit Penghargaan
+								</a>
 							{% endif %}
 							</div>
 						</div>
