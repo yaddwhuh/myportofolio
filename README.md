@@ -41,3 +41,11 @@ Jawaban: `No — you can (and generally should) reuse the same template for both
 ### Tugas 4
 
 AI sama sekali tidak digunakan dalam tugas ini, semua baris kode dibuat dari tutorial minggu ini dan pertanyaan pada stackoverflow.
+
+### Tugas 5
+
+1. Debouncing adalah sebuah delay yang dilakukan ketika user sedang terus-menerus melakukan aksi, misalkan mengetik--saat user melakukan aksi, terdapat timer yang akan terus direset ketika user melanjutkan aksinya, timer akan berhenti ketika user berhenti melakukan aksi dan request akan dilakukan setelah timer itu habis. Umumnya, kita ingin hasil pencarian user langsung muncul ketika user selesai mengetik, sehingga kita akan mengecek input dari user (awalnya) setiap saat. Namun jika website direfresh terus menerus seiring user mengetik, maka request yang dikirim tentunya juga sama banyaknya huruf yang diketik user. Solusinya yaitu debouncing! Website akan menerima request hanya jika user berhenti mengetik selama waktu yang cukup panjang, sehingga request yang diterima website akan jauh lebih sedikit.
+
+2. Ketika kita memanggil fetch(), yang dikembailkan itu bukanlah data yang direquest, melainkan sebuah Promise (objek yang merepresentasikan apa yang kita minta). Ketika await dihilangkan, maka saat kita fetch data dan render data tersebut, yang dirender bukanlah data namun Promise dari fetch().
+
+3. XSS adalah sebuah serangan website dimana penyerang bisa menjalankan sebuah skrip javascript melalui website kita. Django Template itu lebih aman dari AJAX/JavaScript karena Django Template secara default akan auto escape pada variabel (walaupun tetap ada celah). 
