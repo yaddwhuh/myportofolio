@@ -48,4 +48,6 @@ AI sama sekali tidak digunakan dalam tugas ini, semua baris kode dibuat dari tut
 
 2. Ketika kita memanggil fetch(), yang dikembailkan itu bukanlah data yang direquest, melainkan sebuah Promise (objek yang merepresentasikan apa yang kita minta). Ketika await dihilangkan, maka saat kita fetch data dan render data tersebut, yang dirender bukanlah data namun Promise dari fetch().
 
-3. XSS adalah sebuah serangan website dimana penyerang bisa menjalankan sebuah skrip javascript melalui website kita. Django Template itu lebih aman dari AJAX/JavaScript karena Django Template secara default akan auto escape pada variabel (walaupun tetap ada celah). 
+3. XSS adalah sebuah serangan website dimana penyerang bisa menjalankan sebuah skrip javascript melalui website kita. Django Template itu lebih aman dari AJAX/JavaScript karena Django Template secara default akan auto escape pada variabel (walaupun tetap ada celah).
+
+AI sama sekali tidak digunakan dalam tugas ini, semua baris kode dibuat dari tutorial minggu ini.
