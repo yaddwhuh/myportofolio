@@ -31,3 +31,8 @@ urlpatterns = [
     path("achievement/add-ajax/", create_achievement_ajax, name="create_achievement_ajax"),
     path("experience/add-ajax/", create_experience_ajax, name="create_experience_ajax"),
 ]
+
+urlpatterns += [
+    path("api/v1/", include("main.api_urls")),
+    path("api-auth/", include("rest_framework.urls")),
+]

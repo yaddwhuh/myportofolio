@@ -98,9 +98,9 @@
 
 	function buildProjectCardElement(project) {
 		const article = document.createElement('article');
-		article.className = 'experience-card';
+		article.className = 'showcase-card';
 		const image = project.project_image_url
-			? `<img src="${escapeHtml(project.project_image_url)}" alt="${escapeHtml(project.title)}" class="project-image">` : '';
+			? `<img src="${escapeHtml(project.project_image_url)}" alt="${escapeHtml(project.title)}" class="showcase-image">` : '';
 		const link = project.project_url
 			? `<a href="${escapeHtml(project.project_url)}" class="button">Open project</a>` : '';
 		const star = IS_AUTHENTICATED
@@ -113,8 +113,8 @@
 			? `<button type="button" class="button button-danger" data-action="delete"
 				data-id="${escapeHtml(project.id)}">Delete</button>` : '';
 		article.innerHTML = `${image}<h2>${escapeHtml(project.title)}</h2>
-			<span class="experience-category">${escapeHtml(project.tech_stack)}</span>
-			<p class="experience-description">${escapeHtml(project.description)}</p>
+			<span class="showcase-category">${escapeHtml(project.tech_stack)}</span>
+			<p class="showcase-description">${escapeHtml(project.description)}</p>
 			<div class="project-card-actions"><div class="project-actions">
 			${link}${star}${remove}</div></div>`;
 		return article;
